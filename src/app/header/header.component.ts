@@ -14,9 +14,12 @@ export class HeaderComponent implements OnInit {
     public searchByText: EventEmitter<string> = new EventEmitter();
 
 
-    constructor() { }
+    constructor() {
+        console.log(1, this.logo);
+    }
 
     ngOnInit() {
+        console.log(2, this.logo);
     }
 
     public search(event: KeyboardEvent) {
