@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IProduct, products$ } from './data';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IProduct, ProductsService } from './products.service';
 
 @Component({
     selector: 'course-root',
@@ -12,7 +12,15 @@ export class AppComponent implements OnInit, OnDestroy {
     public logoImg = 'assets/img/logo.png';
     public text = '';
 
-    public products$: Observable<IProduct[]> = products$;
+    public products$: Observable<IProduct[]>;
+
+
+    public constructor(
+        private _productsService: ProductsService
+    ) {
+
+
+    }
 
 
     public searchText(value: string): void {
@@ -21,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
+        this.products$ = this._productsService.getProducts();
     }
 
     public ngOnDestroy(): void {

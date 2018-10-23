@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IProduct } from '../data';
+import { IProduct } from '../products.service';
 
 @Component({
     selector: 'course-card',
@@ -17,4 +17,16 @@ export class CardComponent {
     @Input()
     public isOdd!: boolean;
 
+
+    private addition = 28;
+
+    public constructor() {
+        setTimeout(() => {
+            this.addition = 2;
+        }, 5000);
+    }
+
+    public dolarPrice(price: number): number {
+        return price / this.addition;
+    }
 }

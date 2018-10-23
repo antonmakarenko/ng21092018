@@ -1,13 +1,20 @@
-<div class="col-lg-4" >
+<div class="col-lg-4">
   <div class="catalogItem">
     <div class="catalogItem__img">
-      <img src="assets/img/img1.jpg" alt="Обои">
+      <img src="assets/img/img1.jpg" alt="Обои"
+        (mouseenter)="t.show()"
+        (mouseleave)="t.hide()">
     </div>
     <div class="catalogItem__name" [ngClass]="{odd:isOdd}">{{position+1}}. {{product.title}}</div>
     <div class="catalogItem__code">Артикул: {{product.serial}}</div>
     <div class="catalogItem__brand">Бренд: <strong>{{product.author}}</strong></div>
-    <div class="catalogItem__prices">Цена: <strong>{{product.price | currency:'USD'}}</strong>
-      <span class="tooltiptext open">Эквив. ~ 150$</span>
+    <div class="catalogItem__prices"
+      [courseTooltip]="dolarPrice(product.price) | number:'1.0-0'"
+      #t="tool"
+    >
+      Цена:
+      <strong>{{product.price}}</strong>
+      <!--<span class="tooltiptext open">Эквив. ~ 150$</span>-->
     </div>
     <button class="catalogItem__btn">Заказать</button>
   </div>
