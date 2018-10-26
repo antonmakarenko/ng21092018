@@ -3,7 +3,9 @@
     <div class="catalogItem__img">
       <img src="assets/img/img1.jpg" alt="Обои"
         (mouseenter)="t.show()"
-        (mouseleave)="t.hide()">
+        (mouseleave)="t.hide()"
+        [routerLink]="['/products', product._id]"
+      >
     </div>
     <div class="catalogItem__name" [ngClass]="{odd:isOdd}">{{position+1}}. {{product.title}}</div>
     <div class="catalogItem__code">Артикул: {{product.serial}}</div>

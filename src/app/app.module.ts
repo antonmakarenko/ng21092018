@@ -3,12 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { CardComponent } from './card/card.component';
-import { ProductsFilterPipe } from './products-filter.pipe';
+import { CardComponent } from './content/products/card/card.component';
+import { ProductsFilterPipe } from './content/products/products-filter.pipe';
 import { TooltipDirective } from './common/directives/tooltip.directive';
-import { ProductsService } from './products.service';
+import { ProductsService } from './content/products/products.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BASE_URL, BASE_URL_TOKEN } from './config';
+import { FooterComponent } from './footer/footer.component';
+import { ProductsComponent } from './content/products/products.component';
+import { RouterModule } from '@angular/router';
+import { routes } from './routes';
+import { OneProductComponent } from './content/products/one-product/one-product.component';
+import { OneProductResolverService } from './content/products/one-product/one-product-resolver.service';
+import { CustomPreloadService } from './common/services/custom-preload.service';
 
 @NgModule({
     declarations: [
@@ -17,14 +24,20 @@ import { BASE_URL, BASE_URL_TOKEN } from './config';
         HeaderComponent,
         CardComponent,
         ProductsFilterPipe,
-        TooltipDirective
+        TooltipDirective,
+        FooterComponent,
+        ProductsComponent,
+        OneProductComponent
     ],
     imports: [
         BrowserModule,
-        HttpClientModule
+        HttpClientModule,
+        RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadService })
     ],
     providers: [
+        OneProductResolverService,
         ProductsService,
+        CustomPreloadService,
         {
             provide: BASE_URL_TOKEN,
             useValue: BASE_URL,

@@ -25,9 +25,9 @@ export class TooltipDirective implements OnInit {
     ) {
     }
 
-    @HostListener('window:resize', ['$event'])
-    public tooltipHide(e: KeyboardEvent): void {
-        // TODO why not work ???
+    @HostListener('document:keyup.escape', ['$event'])
+    public tooltipHide(_e: KeyboardEvent): void {
+        console.log(_e);
         this.hide();
     }
 

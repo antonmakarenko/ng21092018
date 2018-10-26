@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Inject } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { BASE_URL_TOKEN } from './config';
+import { BASE_URL_TOKEN } from '../../config';
 
 export interface IProduct {
     '_id': string;
@@ -25,6 +25,6 @@ export class ProductsService {
 
     public getProducts(): Observable<IProduct[]> {
         return this._http.get(`${this._baseUrl}/products`)
-            .pipe(map((res: { data: IProduct[] }) => res.data));
+            .pipe(map((res: any) => res.data));
     }
 }
