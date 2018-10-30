@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IProduct, ProductsService } from './products.service';
+import { IProduct } from '../../store/reducers/products.reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'course-products',
@@ -13,7 +14,7 @@ export class ProductsComponent implements OnInit {
     public text = '';
 
     public constructor(
-        private _productsService: ProductsService
+        private _store: Store<any>
     ) {
 
 
@@ -26,7 +27,9 @@ export class ProductsComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.products$ = this._productsService.getProducts();
+         this.products$ = this._store.select('products');
     }
+
+
 
 }

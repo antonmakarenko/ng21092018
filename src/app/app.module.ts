@@ -6,7 +6,6 @@ import { HeaderComponent } from './header/header.component';
 import { CardComponent } from './content/products/card/card.component';
 import { ProductsFilterPipe } from './content/products/products-filter.pipe';
 import { TooltipDirective } from './common/directives/tooltip.directive';
-import { ProductsService } from './content/products/products.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BASE_URL, BASE_URL_TOKEN } from './config';
 import { FooterComponent } from './footer/footer.component';
@@ -16,6 +15,12 @@ import { routes } from './routes';
 import { OneProductComponent } from './content/products/one-product/one-product.component';
 import { OneProductResolverService } from './content/products/one-product/one-product-resolver.service';
 import { CustomPreloadService } from './common/services/custom-preload.service';
+import { StoreModule } from '@ngrx/store';
+import { environment } from '../environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductsEffects } from './store/effects/products.effect';
 
 @NgModule({
     declarations: [
@@ -32,11 +37,13 @@ import { CustomPreloadService } from './common/services/custom-preload.service';
     imports: [
         BrowserModule,
         HttpClientModule,
-        RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadService })
+        RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadService }),
+        EffectsModule.forRoot([ProductsEffects]),
+        StoreModule.forRoot(reducers),
+        !environment.production ? StoreDevtoolsModule.instrument() : []
     ],
     providers: [
         OneProductResolverService,
-        ProductsService,
         CustomPreloadService,
         {
             provide: BASE_URL_TOKEN,

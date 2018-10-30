@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IProduct } from '../products.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { IProduct } from '../../../store/reducers/products.reducer';
 
 @Component({
     selector: 'course-one-product',
@@ -26,5 +26,4 @@ export class OneProductComponent implements OnInit {
         });
         this.product$ = this._activatedRoute.data.pipe(map((data) => data.product));
     }
-
 }

@@ -15,6 +15,8 @@ export class HeaderComponent implements OnInit {
     public searchByText: EventEmitter<string> = new EventEmitter();
 
 
+    public isOpen = true;
+
     public constructor(
         private _router: Router
     ) {

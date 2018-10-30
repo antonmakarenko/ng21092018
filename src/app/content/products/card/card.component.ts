@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { IProduct } from '../products.service';
+import { IProduct } from '../../../store/reducers/products.reducer';
+import { Store } from '@ngrx/store';
+import { AddProductToCart } from '../../../store/actions/cart.action';
 
 @Component({
     selector: 'course-card',
@@ -18,15 +20,16 @@ export class CardComponent {
     public isOdd!: boolean;
 
 
-    private addition = 28;
-
-    public constructor() {
-        setTimeout(() => {
-            this.addition = 2;
-        }, 5000);
+    public constructor(
+        private _store: Store<any>
+    ) {
     }
 
     public dolarPrice(price: number): number {
-        return price / this.addition;
+        return price / 28;
+    }
+
+    public addToCart(product: IProduct): void {
+        this._store.dispatch(new AddProductToCart(product));
     }
 }
