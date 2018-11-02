@@ -4,21 +4,32 @@
       <div class="col-lg-12">
         <div class="registration-wrapper">
           <h1>Авторизация</h1>
-          <form action="">
+          <form [formGroup]="authForm">
             <label class="input-wrapper no-valid">
               <span>Ваше имя</span>
-              <input type="text">
+              <input type="text" formControlName="name"
+              >
+              <!--  <input type="text"
+                  [formControl]="name"
+                >-->
               <div class="valid-message">Введите корректное имя</div>
             </label>
-            <label class="input-wrapper">
-              <span>Пароль</span>
-              <input type="password">
-            </label>
+            <div formGroupName="passwordGroup">
+              <label class="input-wrapper">
+                <span>Пароль</span>
+                <input type="password" formControlName="password">
+              </label>
+              <label class="input-wrapper">
+                <span>Повторить Пароль</span>
+                <input type="password" formControlName="cpassword">
+              </label>
+            </div>
             <div class="btn-wrapper">
               <button>Зарегистрироваться</button>
             </div>
           </form>
         </div>
+
       </div>
     </div>
   </div>

@@ -21,6 +21,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './store/effects/products.effect';
+import { CartComponent } from './header/cart/cart.component';
+import { ProductComponent } from './header/cart/product/product.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import { ProductsEffects } from './store/effects/products.effect';
         TooltipDirective,
         FooterComponent,
         ProductsComponent,
-        OneProductComponent
+        OneProductComponent,
+        CartComponent,
+        ProductComponent
     ],
     imports: [
         BrowserModule,

@@ -6,7 +6,7 @@ import {
     INCREMENT_PRODUCT_IN_CART,
     REMOVE_PRODUCT_FROM_CART
 } from '../actions/cart.action';
-import {, createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface ICartProduct extends IProduct {
     count: number;
@@ -54,4 +54,22 @@ export function cartReducer(state = cartInitialState, action: any) {
 }
 
 
-export const {selectAll, selectTotal} = adapter.getSelectors(createFeatureSelector('cartProducts'));
+export const { selectAll, selectTotal } = adapter.getSelectors(createFeatureSelector('cartProducts'));
+
+export const trueProductsCount = createSelector(
+    selectAll,
+    (products: ICartProduct[]) => {
+        return products.reduce<number>((count: number, product: ICartProduct) => {
+            return count += product.count;
+        }, 0);
+    }
+);
+
+export const totalPrice = createSelector(
+    selectAll,
+    (products: ICartProduct[]) => {
+        return products.reduce<number>((price: number, product: ICartProduct) => {
+            return price += product.price * product.count;
+        }, 0);
+    }
+);
