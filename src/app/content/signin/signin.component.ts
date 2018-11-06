@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -13,7 +13,6 @@ export class SigninComponent implements OnInit, AfterViewInit {
 
     @ViewChild('f')
     public form!: FormGroup;
-
 
     public authForm!: FormGroup;
 
@@ -33,7 +32,7 @@ export class SigninComponent implements OnInit, AfterViewInit {
                     this._nameValidator
                 ]
             ],
-            emails: this._fb.array([this._fb.control('')]),
+            emails: this._fb.array([this.createEmailInput()]),
             male: [true],
             passwordGroup: this._fb.group(
                 {
@@ -59,12 +58,12 @@ export class SigninComponent implements OnInit, AfterViewInit {
 
     }
 
-    public addEmail(): void {
-        (this.authForm.get('emails') as FormArray).push(this._fb.control(''));
+    public get emails() {
+        return this.form.get('emails');
     }
 
-    public removeEmail(index: number): void {
-        (this.authForm.get('emails') as FormArray).removeAt(index);
+    public createEmailInput(): FormControl {
+        return this._fb.control('');
     }
 
     private _nameValidator({ value }: FormControl): ValidationErrors | null {

@@ -13,14 +13,14 @@
               <pre>{{authForm.get('name').errors | json}}</pre>
             </label>
             Мужчина: <course-switcher formControlName="male"></course-switcher>
-            <!--<div>Добавить email<span (click)="addEmail()"> + </span></div>-->
-            <!--<label class="input-wrapper no-valid"-->
-              <!--*ngFor="let e of authForm.get('emails').controls; index as i">-->
-              <!--<span>Email {{i+1}}</span>-->
-              <!--<input type="text" [formControl]="e"> <span (click)="removeEmail(i)"> x </span>-->
-              <!--<div class="valid-message">Введите корректное имя</div>-->
-            <!--</label>-->
 
+            <div>Добавить email<span (click)="emails.push(createEmailInput())"> + </span></div>
+            <label class="input-wrapper no-valid"
+              *ngFor="let e of emails.controls; index as i">
+              <span>Email {{i+1}}</span>
+              <input type="text" [formControl]="e"> <span (click)="emails.removeAt(i)"> x </span>
+              <div class="valid-message">Введите корректный имейл</div>
+            </label>
 
             <div formGroupName="passwordGroup">
               <label class="input-wrapper">
