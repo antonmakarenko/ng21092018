@@ -17,13 +17,18 @@ export class RemoveProductFromCart {
 
     public constructor(public payload: ICartProduct) {}
 }
+
 export class IncrementProductInCart {
     public type = INCREMENT_PRODUCT_IN_CART;
 
     public constructor(public payload: ICartProduct) {}
 }
+
 export class DecrementProductInCart {
     public type = DECREMENT_PRODUCT_IN_CART;
 
     public constructor(public payload: ICartProduct) {}
 }
+
+export type CartActions = AddProductToCart | RemoveProductFromCart |
+    IncrementProductInCart | DecrementProductInCart;

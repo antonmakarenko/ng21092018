@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SigninComponent } from './signin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SwitcherComponent } from './switcher/switcher.component';
 
 @NgModule({
     imports: [
@@ -16,6 +17,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
             }
         ])
     ],
-    declarations: [SigninComponent]
+    declarations: [SigninComponent, SwitcherComponent]
 })
 export class SigninModule {}

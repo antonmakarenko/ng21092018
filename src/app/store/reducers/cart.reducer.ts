@@ -2,8 +2,11 @@ import { IProduct } from './products.reducer';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import {
     ADD_PRODUCT_TO_CART,
+    CartActions,
     DECREMENT_PRODUCT_IN_CART,
+    DecrementProductInCart,
     INCREMENT_PRODUCT_IN_CART,
+    IncrementProductInCart,
     REMOVE_PRODUCT_FROM_CART
 } from '../actions/cart.action';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
@@ -19,7 +22,7 @@ export const adapter: EntityAdapter<ICartProduct> = createEntityAdapter<ICartPro
 
 const cartInitialState = adapter.getInitialState({});
 
-export function cartReducer(state = cartInitialState, action: any) {
+export function cartReducer(state = cartInitialState, action: CartActions) {
     switch (action.type) {
         case ADD_PRODUCT_TO_CART: {
             const entity = state.entities[action.payload._id];
@@ -38,14 +41,14 @@ export function cartReducer(state = cartInitialState, action: any) {
         case INCREMENT_PRODUCT_IN_CART: {
             return adapter.updateOne({
                 id: action.payload._id,
-                changes: { count: action.payload.count + 1 }
+                changes: { count: (action as IncrementProductInCart).payload.count + 1 }
             }, state);
         }
 
         case DECREMENT_PRODUCT_IN_CART: {
             return adapter.updateOne({
                 id: action.payload._id,
-                changes: { count: action.payload.count - 1 }
+                changes: { count: (action as DecrementProductInCart).payload.count - 1 }
             }, state);
         }
         default:
